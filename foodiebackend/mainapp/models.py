@@ -12,4 +12,10 @@ class dishModel(models.Model):
     quantity = models.IntegerField()
     description = models.CharField(max_length=500)
 
+class menuModel(models.Model):
+    hotel = models.OneToOneField("hotelModel", on_delete=models.CASCADE)
+    dish = models.OneToOneField("dishModel", on_delete=models.CASCADE)
+    price = models.IntegerField()
+    category = models.CharField(max_length=50)
+    
     
