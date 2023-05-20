@@ -27,6 +27,14 @@ class userPropertiesModel (models.Model):
 class cartModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dishes = models.ManyToManyField(dishModel, blank=True)
+
     
-    
+class promocodesModel(models.Model):
+    code = models.CharField(max_length=255)
+    type = models.CharField(max_length=50)
+    value = models.IntegerField()
+    maxUse = models.IntegerField()
+    usedtillnow = models.IntegerField()
+
+
     
