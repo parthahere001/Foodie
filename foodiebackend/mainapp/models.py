@@ -17,5 +17,11 @@ class menuModel(models.Model):
     dish = models.OneToOneField("dishModel", on_delete=models.CASCADE)
     price = models.IntegerField()
     category = models.CharField(max_length=50)
+
+class userPropertiesModel (models.Model):
+    isOwner = models.OneToOneField("hotelModel", on_delete=models.CASCADE)
+    isDelivery = models.IntegerField()
+    isAdmin = models.IntegerField()
+
     
     
