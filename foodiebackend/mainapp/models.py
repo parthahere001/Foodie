@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class hotelModel(models.Model):
     name = models.CharField(max_length=255)
@@ -13,15 +14,19 @@ class dishModel(models.Model):
     description = models.CharField(max_length=500)
 
 class menuModel(models.Model):
-    hotel = models.OneToOneField("hotelModel", on_delete=models.CASCADE)
-    dish = models.OneToOneField("dishModel", on_delete=models.CASCADE)
+    hotel = models.OneToOneField(hotelModel, on_delete=models.CASCADE)
+    dish = models.OneToOneField(dishModel, on_delete=models.CASCADE)
     price = models.IntegerField()
     category = models.CharField(max_length=50)
 
 class userPropertiesModel (models.Model):
-    isOwner = models.OneToOneField("hotelModel", on_delete=models.CASCADE)
+    isOwner = models.OneToOneField(hotelModel, on_delete=models.CASCADE)
     isDelivery = models.IntegerField()
     isAdmin = models.IntegerField()
 
+class cartModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dishes = models.ManyToManyField(dishModel, blank=True)
+    
     
     
