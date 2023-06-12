@@ -1,14 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:foodieapp/details.dart';
-import 'package:foodieapp/home.dart';
-import 'package:foodieapp/login.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+import 'screens/sign_in_screen.dart';
+
+void main() {
   runApp(const MyApp());
 }
 
@@ -18,28 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Demo',
+      title: 'FlutterFire Samples',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
+        brightness: Brightness.dark,
       ),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.userChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          }
-          if (snapshot.data == null) {
-            return const LoginPage();
-          } else {
-            User user = snapshot.data as User;
-            if (user.displayName == "" || user.displayName == null) {
-              return DetailsPage();
-            } else {
-              return const HomePage();
-            }
-          }
-        },
-      ),
+      home: const SignInScreen(),
     );
   }
 }
